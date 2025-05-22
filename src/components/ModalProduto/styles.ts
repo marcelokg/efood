@@ -27,6 +27,11 @@ export const ModalImage = styled.div`
   margin: 32px;
   justify-content: center;
   align-items: center;
+
+  img{
+    width: 280px;
+    height: 280px;
+  }
 `
 
 export const ModalInfos = styled.div`

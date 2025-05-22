@@ -9,13 +9,14 @@ export type Props = {
   title: string
   infos: string[]
   rating: number
+  id: number
 }
 
-const Restaurante = ({ description, image, infos, rating, title }: Props) => {
+const Restaurante = ({ description, image, infos, rating, title, id }: Props) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`/perfil`)
+    navigate(`/perfil/${id}`)
   }
 
   return (

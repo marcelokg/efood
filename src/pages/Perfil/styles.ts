@@ -10,7 +10,7 @@ export const Banner = styled.div`
   img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 280px;
     object-fit: cover;
   }
 

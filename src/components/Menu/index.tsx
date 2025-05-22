@@ -1,7 +1,8 @@
 import { AiOutlineDelete } from 'react-icons/ai'
-import type { ItemCarrinhoUnico } from '../../models/Carrinho'
 import * as Styles from './styles'
 import CarrinhoFase from '../../types/CarrinhoFase'
+import type { ItemCarrinhoUnico } from '../../types/ItemCarrinho'
+import { formataPreco } from '../../utils/formatters'
 
 interface Props {
   $aberto: boolean
@@ -18,8 +19,8 @@ interface Props {
   esvaziarCarrinho: () => void
 }
 
-const calcularCarrinho = (itens: ItemCarrinhoUnico[]): string => {
-  return itens.reduce((soma, item) => soma + parseFloat(item.price.replace(',', '.')), 0).toFixed(2)
+const calcularCarrinho = (itens: ItemCarrinhoUnico[]): number => {
+  return itens.reduce((soma, item) => soma + item.preco, 0)
 }
 
 const Menu = ({
@@ -52,10 +53,10 @@ const Menu = ({
                 ) : (
                   itens.map((item) => (
                     <Styles.CarrinhoItemContainer key={item.cartItemId}>
-                      <Styles.CarrinhoItemImg src={item.image} />
+                      <Styles.CarrinhoItemImg src={item.foto} />
                       <Styles.CarrinhoInfos>
-                        <h3>{item.title}</h3>
-                        <span>R$ {item.price}</span>
+                        <h3>{item.nome}</h3>
+                        <span>{formataPreco(item.preco)}</span>
                       </Styles.CarrinhoInfos>
                       {removeItem && (
                         <Styles.RemoveButton onClick={() => removeItem(item.cartItemId)}>
@@ -70,13 +71,7 @@ const Menu = ({
                 <>
                   <Styles.Total>
                     <p>Valor total</p>
-                    <p>
-                      R${' '}
-                      {parseFloat(total).toLocaleString('pt-BR', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                    </p>
+                    <p>{formataPreco(total)}</p>
                   </Styles.Total>
                   <Styles.ButtonContinuarEntrega
                     className="botaoContinuarEntrega"
@@ -137,11 +132,7 @@ const Menu = ({
             <>
               <Styles.FormContainer>
                 <Styles.TituloMenu>
-                  Pagamento - Valor a pagar R${' '}
-                  {parseFloat(total).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  Pagamento - Valor a pagar {formataPreco(total)}
                 </Styles.TituloMenu>
                 <Styles.Form>
                   <ul>

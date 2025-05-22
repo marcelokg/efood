@@ -6,7 +6,10 @@ export const CardContainer = styled.div`
   margin-bottom: 60px;
   position: relative;
   > img {
+    max-width: 470px;
+    height: 220px;;
     width: 100%;
+    object-fit: cover;
     border: none;
   }
 `

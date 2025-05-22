@@ -1,12 +1,12 @@
 import { Cart, HeaderBar, HeaderTitle, Link, Logo } from './styles'
 import logo from '../../assets/images/logo.png'
 import { useNavigate } from 'react-router-dom'
-import type ProdutoModel from '../../models/ProdutoModel'
+import type { ItemCarrinhoUnico } from '../../types/ItemCarrinho'
 
 interface Props {
   $isPerfil?: boolean // Indica se é a página de perfil
   title?: string // Título opcional para a home
-  itensCarrinho?: ProdutoModel[]
+  itensCarrinho?: ItemCarrinhoUnico[]
   toggleCarrinho?: () => void
 }
 
