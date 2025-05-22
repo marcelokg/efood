@@ -31,6 +31,7 @@ export const ModalImage = styled.div`
   img{
     width: 280px;
     height: 280px;
+    object-fit: cover;
   }
 `
 

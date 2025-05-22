@@ -55,11 +55,11 @@ export const CarrinhoInfos = styled.div`
   }
 `
 export const CarrinhoItemImg = styled.img`
-  width: 130px;
-  heigth: 130px;
+  width: 80px;
+  height: 80px;
   margin-right: 10px;
   margin-left: 8px;
-  0bject-fit: cover;
+  object-fit: cover;
 `
 export const CarrinhoItemContainer = styled.li`
   display: flex;
