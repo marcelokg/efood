@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
-import { Banner, BannerTitulo } from "./styles";
+import { Banner, BannerTextWrapper } from "./styles";
 import ProdutoList from "../../components/ProdutoList";
 import ModalProduto from "../../components/ModalProduto";
 import Menu from "../../components/Menu";
 import CarrinhoFase from "../../types/CarrinhoFase";
-import { useParams } from "react-router-dom";
 import type { Cardapio, Restaurante } from "../Home";
+import { CardContainer } from "../../components/RestauranteList/styles";
 
 interface ItemCarrinhoUnico extends Cardapio {
   cartItemId: string;
 }
 
 const Perfil = () => {
-  const { id } = useParams<{id: string}>();
+  const { id } = useParams<{ id: string }>();
 
   const [restauranteData, setRestauranteData] = useState<Restaurante>();
 
   const [modalAberto, setModalAberto] = useState(false);
-  const [produtoSelecionado, setProdutoSelecionado] =
-    useState<Cardapio | null>(null);
+  const [produtoSelecionado, setProdutoSelecionado] = useState<Cardapio | null>(
+    null
+  );
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
   const [itensCarrinho, setItensCarrinho] = useState<ItemCarrinhoUnico[]>([]);
   const [faseCarrinho, setFaseCarrinho] = useState<CarrinhoFase>(
@@ -32,7 +34,7 @@ const Perfil = () => {
     fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
       .then((res) => res.json())
       .then((res) => setRestauranteData(res));
-  },[id]);
+  }, [id]);
 
   const fecharCarrinho = () => {
     setCarrinhoAberto(false);
@@ -124,9 +126,13 @@ const Perfil = () => {
         toggleCarrinho={toggleCarrinho}
       />
       <Banner>
-        <img src={restauranteData?.capa} />
-        <h2>{restauranteData?.tipo}</h2>
-        <BannerTitulo>{restauranteData?.titulo}</BannerTitulo>
+        <img src={restauranteData?.capa} alt="Banner do Restaurante" />
+        <CardContainer style={{ position: "relative", height: "100%" }}>
+          <BannerTextWrapper>
+            <h2>{restauranteData?.tipo}</h2>
+            <h1>{restauranteData?.titulo}</h1>
+          </BannerTextWrapper>
+        </CardContainer>
       </Banner>
       <ProdutoList
         produtos={restauranteData?.cardapio || []}

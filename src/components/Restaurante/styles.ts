@@ -5,17 +5,21 @@ export const CardContainer = styled.div`
   color: ${cores.vermelhoClaro};
   margin-bottom: 60px;
   position: relative;
+  background-color: white;
+  overflow: hidden;
+  border-left: 1px solid ${cores.vermelhoClaro};  
+  border-right: 1px solid ${cores.vermelhoClaro};
+  border-bottom: 1px solid ${cores.vermelhoClaro};
+  border-top: none;
+
   > img {
-    max-width: 470px;
-    height: 220px;;
     width: 100%;
-    object-fit: cover;
-    border: none;
+    height: 217px;
+    display: block;
   }
 `
 export const CardContent = styled.div`
-  border: 1px solid ${cores.vermelhoClaro};
-  border-top: transparent;
+  padding: 8px;
 `
 
 export const CardTitulo = styled.div`

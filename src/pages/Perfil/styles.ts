@@ -1,21 +1,28 @@
-import styled from 'styled-components'
-import { cores } from '../../styles'
+import styled from "styled-components";
+import { cores } from "../../styles";
 
 export const Banner = styled.div`
   position: relative;
   width: 100%;
-  height: auto;
+  height: 280px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   img {
     display: block;
+    position: absolute;
     width: 100%;
-    height: 280px;
+    height: 100%;
     object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: 0;
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -25,22 +32,30 @@ export const Banner = styled.div`
     opacity: 1;
     z-index: 1;
   }
+`;
+export const BannerTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 8px 0;
 
   h2 {
-    position: absolute;
-    z-index: 2;
-    top: 20px;
-    left: 140px;
     font-weight: 100;
     color: ${cores.branco};
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 20px;
+    font-size: 32px;
   }
-`
 
-export const BannerTitulo = styled.h1`
-  position: absolute;
-  z-index: 2;
-  top: 200px;
-  left: 140px;
-  color: ${cores.branco};
-  font-weight: bold;
-`
+  h1 {
+    color: ${cores.branco};
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: auto;
+    padding-bottom: 20px;
+  }
+`;
