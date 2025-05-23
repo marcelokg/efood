@@ -6,19 +6,19 @@ type Props = {
   nome: string
   descricao: string
   id: number
-  preco: number;
+  preco: number
   porcao: string
   abrirModal: (produto: Cardapio) => void
   adicionarAoCarrinho: (produto: Cardapio) => void
 }
 
 const Produto = ({ descricao, foto, nome, abrirModal, porcao, id, preco }: Props) => {
-  const produtoCompleto: Cardapio = {foto, nome, descricao, id, porcao, preco}
+  const produtoCompleto: Cardapio = { foto, nome, descricao, id, porcao, preco }
 
   const LimiteCaracteres = 120
 
   const limitarDescricao = (texto: string, limite: number): string => {
-    if(texto.length > limite){
+    if (texto.length > limite) {
       return texto.slice(0, limite) + '...'
     }
     return texto

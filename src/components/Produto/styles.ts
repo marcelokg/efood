@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { cores } from "../../styles";
+import styled from 'styled-components'
+import { cores } from '../../styles'
 
 export const CardProduto = styled.div`
   max-width: 320px;
@@ -9,15 +9,15 @@ export const CardProduto = styled.div`
   margin-bottom: 32px;
   color: ${cores.rosa};
   padding-bottom: 8px;
-`;
+`
 
 export const ImagemProduto = styled.img`
   width: 304px;
-  height: 167px;;
+  height: 167px;
   border-radius: 4px;
   margin: 8px 8px;
   object-fit: cover;
-`;
+`
 
 export const CardProdutoContent = styled.div`
   margin: 8px;
@@ -32,7 +32,7 @@ export const CardProdutoContent = styled.div`
     line-height: 22px;
     margin-bottom: 8px;
   }
-`;
+`
 export const ButtonAdd = styled.button`
   background-color: ${cores.rosa};
   color: ${cores.vermelhoClaro};
@@ -42,4 +42,4 @@ export const ButtonAdd = styled.button`
   width: 100%;
   cursor: pointer;
   border: none;
-`;
+`

@@ -28,7 +28,7 @@ export const ModalImage = styled.div`
   justify-content: center;
   align-items: center;
 
-  img{
+  img {
     width: 280px;
     height: 280px;
     object-fit: cover;

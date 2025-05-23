@@ -13,7 +13,6 @@ export const HeaderBar = styled.header<PropsHeader>`
   position: relative;
   text-align: center;
   color: ${cores.rosa};
-
 `
 export const Container = styled.div<PropsHeader>`
   max-width: 1024px;
@@ -45,12 +44,15 @@ export const HeaderTitle = styled.h1<PropsHeader>`
   margin: 0;
   width: 100%;
 
-  ${(props) => props.$isPerfil ? `
+  ${(props) =>
+    props.$isPerfil
+      ? `
     align-self: flex-start;
     margin-top: auto;
     margin-bottom: 0;
     padding: 0;
-  ` : `
+  `
+      : `
     padding-top: 160px;
     padding-bottom: 40px;
   `}

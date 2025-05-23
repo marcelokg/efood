@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { cores } from "../../styles";
+import styled from 'styled-components'
+import { cores } from '../../styles'
 
 export const Banner = styled.div`
   position: relative;
@@ -22,7 +22,7 @@ export const Banner = styled.div`
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -32,7 +32,7 @@ export const Banner = styled.div`
     opacity: 1;
     z-index: 1;
   }
-`;
+`
 export const BannerTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -58,4 +58,4 @@ export const BannerTextWrapper = styled.div`
     margin-top: auto;
     padding-bottom: 20px;
   }
-`;
+`

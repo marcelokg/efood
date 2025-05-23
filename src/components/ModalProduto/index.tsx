@@ -5,19 +5,19 @@ import {
   ModalDetail,
   ModalImage,
   ModalInfos,
-} from "./styles";
-import { ModalFechar } from "../../styles";
-import type { Cardapio } from "../../pages/Home";
-import { formataPreco } from "../../utils/formatters";
+} from './styles'
+import { ModalFechar } from '../../styles'
+import type { Cardapio } from '../../pages/Home'
+import { formataPreco } from '../../utils/formatters'
 
 type Props = {
-  produto: Cardapio;
-  onClose: () => void;
-  adicionarAoCarrinho: (produto: Cardapio) => void;
-};
+  produto: Cardapio
+  onClose: () => void
+  adicionarAoCarrinho: (produto: Cardapio) => void
+}
 
 const ModalProduto = ({ produto, onClose, adicionarAoCarrinho }: Props) => {
-  if(!produto) return null
+  if (!produto) return null
 
   return (
     <ModalContainer onClick={onClose}>
@@ -33,8 +33,8 @@ const ModalProduto = ({ produto, onClose, adicionarAoCarrinho }: Props) => {
             <p>{produto.porcao}</p>
             <ButtonModal
               onClick={() => {
-                adicionarAoCarrinho(produto);
-                onClose();
+                adicionarAoCarrinho(produto)
+                onClose()
               }}
             >
               Adicionar ao carrinho - {formataPreco(produto.preco)}
@@ -43,7 +43,7 @@ const ModalProduto = ({ produto, onClose, adicionarAoCarrinho }: Props) => {
         </ModalDetail>
       </ModalContent>
     </ModalContainer>
-  );
-};
+  )
+}
 
-export default ModalProduto;
+export default ModalProduto

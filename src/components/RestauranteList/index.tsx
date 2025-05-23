@@ -1,25 +1,25 @@
-import type { Restaurante } from "../../pages/Home";
-import Product from "../Restaurante";
-import { CardContainer, List } from "./styles";
+import type { Restaurante } from '../../pages/Home'
+import Product from '../Restaurante'
+import { CardContainer, List } from './styles'
 
 type Props = {
-  restaurantes: Restaurante[];
-};
+  restaurantes: Restaurante[]
+}
 
 const RestauranteList = ({ restaurantes }: Props) => {
   const getTags = (restaurante: Restaurante) => {
     const tags = []
 
-    if(restaurante.tipo){
+    if (restaurante.tipo) {
       tags.push(restaurante.tipo)
     }
 
-    if(restaurante.destacado === true){
+    if (restaurante.destacado === true) {
       tags.push('Destaque')
     }
 
     return tags
-  };
+  }
 
   return (
     <CardContainer>
@@ -37,6 +37,6 @@ const RestauranteList = ({ restaurantes }: Props) => {
         ))}
       </List>
     </CardContainer>
-  );
-};
-export default RestauranteList;
+  )
+}
+export default RestauranteList

@@ -20,7 +20,9 @@ const ProdutoList = ({ produtos, abrirModal, adicionarAoCarrinho }: Props) => (
           porcao={produto.porcao}
           preco={produto.preco}
           abrirModal={() => abrirModal(produto)}
-          adicionarAoCarrinho={() => adicionarAoCarrinho(produto)} id={0}        />
+          adicionarAoCarrinho={() => adicionarAoCarrinho(produto)}
+          id={0}
+        />
       ))}
     </CardProdutosList>
   </CardProdutosContainer>

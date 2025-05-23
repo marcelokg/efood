@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
   position: relative;
   background-color: white;
   overflow: hidden;
-  border-left: 1px solid ${cores.vermelhoClaro};  
+  border-left: 1px solid ${cores.vermelhoClaro};
   border-right: 1px solid ${cores.vermelhoClaro};
   border-bottom: 1px solid ${cores.vermelhoClaro};
   border-top: none;
