@@ -10,30 +10,66 @@ export const HeaderBar = styled.header<PropsHeader>`
   background-image: url(${HeaderImg});
   width: 100%;
   height: ${(props) => (props.$isPerfil ? '186px' : '384px')};
-  display: flex;
-  flex-direction: ${(props) => (props.$isPerfil ? 'row' : 'column')};
-  justify-content: ${(props) => (props.$isPerfil ? 'space-around' : 'center')};
-  align-items: center;
-  text-align: center;
   position: relative;
+  text-align: center;
+  color: ${cores.rosa};
+
 `
-export const HeaderTitle = styled.h1<PropsHeader>`
+export const Container = styled.div<PropsHeader>`
+  max-width: 1024px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  height: 100%;
   display: flex;
-  font-size: 36px;
-  font-weight: bold;
-  padding-bottom: 40px;
-  padding-top: 160px;
-  color: ${cores.vermelhoClaro};
-`
-export const Logo = styled.div<PropsHeader>`
+
   ${(props) =>
     props.$isPerfil
       ? `
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding-bottom: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px;
+      `
+      : `
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      `}
+`
+
+export const HeaderTitle = styled.h1<PropsHeader>`
+  font-size: ${(props) => (props.$isPerfil ? '32px' : '36px')};
+  font-weight: bold;
+  color: ${cores.vermelhoClaro};
+  margin: 0;
+  width: 100%;
+
+  ${(props) => props.$isPerfil ? `
+    align-self: flex-start;
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 0;
+  ` : `
+    padding-top: 160px;
+    padding-bottom: 40px;
+  `}
+`
+
+export const Logo = styled.div<PropsHeader>`
+  img {
+    max-width: 125px;
+    width: 100%;
+    display: block;
+  }
+
+  ${(props) =>
+    props.$isPerfil
+      ? `
+        position: static;
+        transform: none;
+        margin: 0;
+        padding: 0;
       `
       : `
         display: flex;
@@ -46,11 +82,10 @@ export const Logo = styled.div<PropsHeader>`
 
 export const Link = styled.a`
   text-decoration: none;
-  font-size: 18px;
   color: ${cores.vermelhoClaro};
   font-weight: bold;
   cursor: pointer;
-  padding-right: 70px;
+  font-size: 18px;
 `
 export const Cart = styled.p`
   color: ${cores.vermelhoClaro};

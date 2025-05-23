@@ -33,11 +33,6 @@ export const Banner = styled.div`
     z-index: 1;
   }
 `;
-export const BannerTitulo = styled.h1`
-  z-index: 2;
-  color: ${cores.branco};
-  font-weight: bold;
-`;
 export const BannerTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
