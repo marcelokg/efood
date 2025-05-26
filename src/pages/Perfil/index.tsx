@@ -1,103 +1,89 @@
-import { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import { Banner, BannerTextWrapper } from './styles'
 import ProdutoList from '../../components/ProdutoList'
 import ModalProduto from '../../components/ModalProduto'
 import Menu from '../../components/Menu'
-import CarrinhoFase from '../../types/CarrinhoFase'
-import type { Cardapio, Restaurante } from '../Home'
+import type { Cardapio } from '../Home'
 import { CardContainer } from '../../components/RestauranteList/styles'
-
-interface ItemCarrinhoUnico extends Cardapio {
-  cartItemId: string
-}
+import { useDispatch, useSelector } from 'react-redux'
+import { useGetRestauranteByIdQuery } from '../../services/api'
+import {
+  addCarrinho,
+  continuarConfirmacao,
+  continuarEntrega,
+  continuarPagamento,
+  esvaziarCarrinho,
+  fecharCarrinho,
+  removeItemCarrinho,
+  toggleCarrinho,
+  voltarParaOCarrinho,
+  voltarParaOEndereco,
+} from '../../store/reducers/cart'
+import { abrirModal, fecharModal } from '../../store/reducers/modal'
+import type { RootState } from '../../store'
 
 const Perfil = () => {
   const { id } = useParams<{ id: string }>()
+  const dispatch = useDispatch()
 
-  const [restauranteData, setRestauranteData] = useState<Restaurante>()
+  const { data: restauranteData } = useGetRestauranteByIdQuery(id!)
 
-  const [modalAberto, setModalAberto] = useState(false)
-  const [produtoSelecionado, setProdutoSelecionado] = useState<Cardapio | null>(null)
-  const [carrinhoAberto, setCarrinhoAberto] = useState(false)
-  const [itensCarrinho, setItensCarrinho] = useState<ItemCarrinhoUnico[]>([])
-  const [faseCarrinho, setFaseCarrinho] = useState<CarrinhoFase>(CarrinhoFase.CARRINHO)
-  const [numeroPedido, setNumeroPedido] = useState<string>('')
+  const itensCarrinho = useSelector((state: RootState) => state.cart.itens)
+  const carrinhoAberto = useSelector((state: RootState) => state.cart.aberto)
+  const faseCarrinho = useSelector((state: RootState) => state.cart.fase)
+  const numeroPedido = useSelector((state: RootState) => state.cart.numeroPedido)
 
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => setRestauranteData(res))
-  }, [id])
+  const modalAberto = useSelector((state: RootState) => state.modal.aberto)
+  const produtoSelecionado = useSelector((state: RootState) => state.modal.produtoSelecionado)
 
-  const fecharCarrinho = () => {
-    setCarrinhoAberto(false)
-    setFaseCarrinho(CarrinhoFase.CARRINHO)
-    setNumeroPedido('')
+  const handleAddCarrinho = (produto: Cardapio) => {
+    dispatch(addCarrinho(produto))
   }
 
-  const adicionarCarrinho = (produto: Cardapio) => {
-    const novoItem: ItemCarrinhoUnico = {
-      ...produto,
-      cartItemId: uuidv4(),
-    }
-    setItensCarrinho((prevItens) => [...prevItens, novoItem])
+  const handleAbrirModal = (produto: Cardapio) => {
+    dispatch(abrirModal(produto))
   }
 
-  const abrirModal = (produto: Cardapio) => {
-    setProdutoSelecionado(produto)
-    setModalAberto(true)
+  const handleFecharModal = () => {
+    dispatch(fecharModal())
   }
 
-  const fecharModal = () => {
-    setModalAberto(false)
-    setProdutoSelecionado(null)
+  const handleToggleCarrinho = () => {
+    dispatch(toggleCarrinho())
   }
 
-  const toggleCarrinho = () => {
-    setCarrinhoAberto(!carrinhoAberto)
-    setFaseCarrinho(CarrinhoFase.CARRINHO)
-    setNumeroPedido('')
+  const handleFecharCarrinho = () => {
+    dispatch(fecharCarrinho())
   }
 
-  const removeItem = (cartItemIdToRemove: string) => {
-    const novosItens = itensCarrinho.filter((item) => item.cartItemId !== cartItemIdToRemove)
-    setItensCarrinho(novosItens)
+  const handleRemoveItemCarrinho = (cartItemIdToRemove: string) => {
+    dispatch(removeItemCarrinho(cartItemIdToRemove))
   }
 
-  const continuarEntrega = () => {
-    setFaseCarrinho(CarrinhoFase.ENTREGA)
+  const handleContinuarEntrega = () => {
+    dispatch(continuarEntrega())
   }
 
-  const continuarPagamento = () => {
-    const novoNumero = gerarNumeroPedido()
-    setNumeroPedido(novoNumero)
-    setFaseCarrinho(CarrinhoFase.PAGAMENTO)
+  const handleContinuarPagamento = () => {
+    dispatch(continuarPagamento())
   }
 
-  const continuarConfimacao = () => {
-    setFaseCarrinho(CarrinhoFase.CONFIRMACAO)
+  const handleContinuarConfimacao = () => {
+    dispatch(continuarConfirmacao())
   }
 
-  const voltarParaOCarrinho = () => {
-    setFaseCarrinho(CarrinhoFase.CARRINHO)
+  const handleVoltarParaOCarrinho = () => {
+    dispatch(voltarParaOCarrinho())
   }
 
-  const voltarParaOEndereco = () => {
-    setFaseCarrinho(CarrinhoFase.ENTREGA)
+  const handleVoltarParaOEndereco = () => {
+    dispatch(voltarParaOEndereco())
   }
 
-  const gerarNumeroPedido = (): string => {
-    return Math.floor(10000 + Math.random() * 90000).toString()
-  }
-
-  const esvaziarCarrinho = () => {
-    setItensCarrinho([])
-    setCarrinhoAberto(false)
-    setFaseCarrinho(CarrinhoFase.CARRINHO)
-    setNumeroPedido('')
+  const handleEsvaziarCarrinho = () => {
+    dispatch(esvaziarCarrinho())
   }
 
   useEffect(() => {
@@ -114,7 +100,11 @@ const Perfil = () => {
 
   return (
     <>
-      <Header $isPerfil={true} itensCarrinho={itensCarrinho} toggleCarrinho={toggleCarrinho} />
+      <Header
+        $isPerfil={true}
+        itensCarrinho={itensCarrinho}
+        toggleCarrinho={handleToggleCarrinho}
+      />
       <Banner>
         <img src={restauranteData?.capa} alt="Banner do Restaurante" />
         <CardContainer style={{ position: 'relative', height: '100%' }}>
@@ -126,28 +116,28 @@ const Perfil = () => {
       </Banner>
       <ProdutoList
         produtos={restauranteData?.cardapio || []}
-        abrirModal={abrirModal}
-        adicionarAoCarrinho={adicionarCarrinho}
+        abrirModal={handleAbrirModal}
+        adicionarAoCarrinho={handleAddCarrinho}
       />
       {modalAberto && produtoSelecionado && (
         <ModalProduto
           produto={produtoSelecionado}
-          onClose={fecharModal}
-          adicionarAoCarrinho={adicionarCarrinho}
+          onClose={handleFecharModal}
+          adicionarAoCarrinho={handleAddCarrinho}
         />
       )}
       <Menu
         $aberto={carrinhoAberto}
-        onClose={fecharCarrinho}
+        onClose={handleFecharCarrinho}
         itens={itensCarrinho}
-        removeItem={removeItem}
+        removeItem={handleRemoveItemCarrinho}
         fase={faseCarrinho}
-        continuarEntrega={continuarEntrega}
-        voltarParaOCarrinho={voltarParaOCarrinho}
-        continuarPagamento={continuarPagamento}
-        voltarParaOEndereco={voltarParaOEndereco}
-        continuarConfimacao={continuarConfimacao}
-        esvaziarCarrinho={esvaziarCarrinho}
+        continuarEntrega={handleContinuarEntrega}
+        voltarParaOCarrinho={handleVoltarParaOCarrinho}
+        continuarPagamento={handleContinuarPagamento}
+        voltarParaOEndereco={handleVoltarParaOEndereco}
+        continuarConfimacao={handleContinuarConfimacao}
+        esvaziarCarrinho={handleEsvaziarCarrinho}
         numeroPedido={numeroPedido}
       />
     </>
