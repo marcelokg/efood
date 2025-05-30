@@ -130,6 +130,11 @@ export const TituloMenu = styled.h2`
 export const Form = styled.form`
   font-size: 14px;
 
+  small{
+    font-size: 10px;
+    display: block;
+  }
+
   label {
     display: block;
     margin-bottom: 8px;

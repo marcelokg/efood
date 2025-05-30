@@ -8,14 +8,12 @@ interface CartState {
   itens: ItemCarrinhoUnico[]
   aberto: boolean
   fase: CarrinhoFase
-  numeroPedido: string
 }
 
 const initialState: CartState = {
   itens: [],
   aberto: false,
   fase: CarrinhoFase.CARRINHO,
-  numeroPedido: '',
 }
 
 const cartSlice = createSlice({
@@ -35,7 +33,6 @@ const cartSlice = createSlice({
     toggleCarrinho: (state) => {
       state.aberto = !state.aberto
       state.fase = CarrinhoFase.CARRINHO
-      state.numeroPedido = ''
     },
     fecharCarrinho: (state) => {
       state.aberto = false
@@ -45,7 +42,6 @@ const cartSlice = createSlice({
       state.fase = CarrinhoFase.ENTREGA
     },
     continuarPagamento: (state) => {
-      state.numeroPedido = Math.floor(10000 + Math.random() * 90000).toString()
       state.fase = CarrinhoFase.PAGAMENTO
     },
     continuarConfirmacao: (state) => {
@@ -60,8 +56,6 @@ const cartSlice = createSlice({
     esvaziarCarrinho: (state) => {
       state.itens = []
       state.fase = CarrinhoFase.CARRINHO
-      state.aberto = false
-      state.numeroPedido = ''
     },
   },
 })

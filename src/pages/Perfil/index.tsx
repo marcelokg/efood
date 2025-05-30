@@ -33,7 +33,6 @@ const Perfil = () => {
   const itensCarrinho = useSelector((state: RootState) => state.cart.itens)
   const carrinhoAberto = useSelector((state: RootState) => state.cart.aberto)
   const faseCarrinho = useSelector((state: RootState) => state.cart.fase)
-  const numeroPedido = useSelector((state: RootState) => state.cart.numeroPedido)
 
   const modalAberto = useSelector((state: RootState) => state.modal.aberto)
   const produtoSelecionado = useSelector((state: RootState) => state.modal.produtoSelecionado)
@@ -138,7 +137,6 @@ const Perfil = () => {
         voltarParaOEndereco={handleVoltarParaOEndereco}
         continuarConfimacao={handleContinuarConfimacao}
         esvaziarCarrinho={handleEsvaziarCarrinho}
-        numeroPedido={numeroPedido}
       />
     </>
   )
